@@ -1,3 +1,10 @@
+import os
+import sys
+import pandas as pd
+
+jsonfile = sys.argv[1]
+outfile = sys.argv[2]
+
 def read_json(infile):
     with open(infile, 'r', encoding='utf-8') as file:
         data = json.load(file)
@@ -56,3 +63,7 @@ def read_json(infile):
     df.columns = ['contig_id','contig_name','contig_description','regionid','start','end','strand','category','product']
     
     return df
+
+if __name__ == '__main__':
+    outdf = read_json(jsonfile)
+    outdf.to_csv(outfile,sep="\t",index=None)
